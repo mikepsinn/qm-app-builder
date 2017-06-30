@@ -14,7 +14,6 @@ checkout:
   post:
     - git submodule sync --recursive
     - git submodule update --recursive --init # use submodules
-    - apt-get install tree
     - tree
     - chmod -R +x ./app/scripts
 
@@ -24,6 +23,7 @@ dependencies:
     #- wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
     #- tar -xzf sc-latest-linux.tar.gz
   pre:
+    - apt-get install -y tree
     - git fetch --all --unshallow || true
     - chmod +x -R ./app/hooks/*
     - chmod 777 -R $PWD
