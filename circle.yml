@@ -14,7 +14,7 @@ checkout:
   post:
     - git submodule sync --recursive
     - git submodule update --recursive --init # use submodules
-    - chmod -R +x scripts
+    - chmod -R +x ./app/scripts
 
 # Customize dependencies
 dependencies:
@@ -23,7 +23,7 @@ dependencies:
     #- tar -xzf sc-latest-linux.tar.gz
   pre:
     - git fetch --all --unshallow || true
-    - chmod +x -R hooks/*
+    - chmod +x -R ./app/hooks/*
     - chmod 777 -R $PWD
 
   override:
