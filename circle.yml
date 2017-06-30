@@ -51,19 +51,19 @@ deployment:
   apps:
     branch: /apps\/.*/
     commands:
-      - ./apps/scripts/circleci_install_dependencies.sh
-      - gulp prepareRepositoryForAndroid
-      - gulp buildAndroidApp
-      - gulp buildChromeExtension
+      - ./app/scripts/circleci_install_dependencies.sh
+      - cd app && gulp prepareRepositoryForAndroid
+      - cd app && gulp buildAndroidApp
+      - cd app && gulp buildChromeExtension
   staging:
     branch: develop
     commands:
-      - ./scripts/circleci_install_dependencies.sh
-      - ./scripts/circleci_build_android_apps_and_chrome_extensions.sh
+      - ./app/scripts/circleci_install_dependencies.sh
+      - ./app/scripts/circleci_build_android_apps_and_chrome_extensions.sh
       - bash buddybuild_postbuild.sh
   production:
     branch: master
     commands:
-      - ./scripts/circleci_install_dependencies.sh
-      - ./scripts/circleci_build_android_apps_and_chrome_extensions.sh
-      - gulp ionicUploadProductionForAllApps
+      - ./app/scripts/circleci_install_dependencies.sh
+      - ./app/scripts/circleci_build_android_apps_and_chrome_extensions.sh
+      - cd app && gulp ionicUploadProductionForAllApps
