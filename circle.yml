@@ -31,7 +31,9 @@ dependencies:
     - echo "This line is to prevent automatic dependency installation."
 
   cache_directories:
-    - "./app/node_modules"   # Probably don't want to cache node_modules so we catch problematic dependency changes
+    - /home/ubuntu/nvm/versions/node/<version>/bin
+    - /home/ubuntu/nvm/versions/node/<version>/lib/node_modules
+    - app/node_modules   # Probably don't want to cache node_modules so we catch problematic dependency changes
 
 test:
   override:
