@@ -20,7 +20,6 @@ dependencies:
     - git fetch --all --unshallow
     - chmod 777 -R $PWD
     - npm install -g gulp cordova@7.0.0 ionic@2.2.3 bower
-    - mkdir app/node_modules # See https://circleci.com/docs/1.0/how-cache-works/
   post:
     - tree
     - chmod -R +x ./app/scripts
