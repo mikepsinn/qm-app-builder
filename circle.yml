@@ -15,16 +15,17 @@ checkout:
 
 # Customize dependencies
 dependencies:
-  post:
-    #- wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
-    #- tar -xzf sc-latest-linux.tar.gz
-    - tree
-    - chmod -R +x ./app/scripts
-    - chmod +x -R ./app/hooks/*
   pre:
     - sudo apt-get update; sudo apt-get install tree imagemagick
     - git fetch --all --unshallow
     - chmod 777 -R $PWD
+    - npm install -g gulp cordova@7.0.0 ionic@2.2.3 bower
+  post:
+    - tree
+    - chmod -R +x ./app/scripts
+    - chmod +x -R ./app/hooks/*
+    - cd app && npm install
+    - cd app && ionic info
 
   override:
     - echo "This line is to prevent automatic dependency installation."
@@ -49,19 +50,16 @@ deployment:
   apps:
     branch: /apps\/.*/
     commands:
-      - ./app/scripts/circleci_install_dependencies.sh
       - cd app && gulp prepareRepositoryForAndroid
       - cd app && gulp buildAndroidApp
       - cd app && gulp buildChromeExtension
   staging:
     branch: develop
     commands:
-      - ./app/scripts/circleci_install_dependencies.sh
       - ./app/scripts/circleci_build_android_apps_and_chrome_extensions.sh
       - bash buddybuild_postbuild.sh
   production:
     branch: master
     commands:
-      - ./app/scripts/circleci_install_dependencies.sh
       - ./app/scripts/circleci_build_android_apps_and_chrome_extensions.sh
       - cd app && gulp ionicUploadProductionForAllApps
