@@ -22,7 +22,7 @@ dependencies:
     - chmod 777 -R $PWD
     - npm install -g gulp cordova@7.0.0 ionic@2.2.3 bower
   post:
-    - tree
+    #- tree
     - chmod -R +x ./app/scripts
     - chmod +x -R ./app/hooks/*
     - cd app && npm install
