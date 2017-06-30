@@ -14,6 +14,8 @@ checkout:
   post:
     - git submodule sync --recursive
     - git submodule update --recursive --init # use submodules
+    - apt-get install tree
+    - tree
     - chmod -R +x ./app/scripts
 
 # Customize dependencies
@@ -30,7 +32,7 @@ dependencies:
     - echo "This line is to prevent automatic dependency installation."
 
   cache_directories:
-    - "node_modules"   # Probably don't want to cache node_modules so we catch problematic dependency changes
+    - "./app/node_modules"   # Probably don't want to cache node_modules so we catch problematic dependency changes
 
 test:
   override:
@@ -42,8 +44,8 @@ general:
       - gh-pages # list of branches to ignore
       - /release\/.*/ # or ignore regexes
   artifacts:
-    - "app/build"
-    #- "dropbox"
+    - "./app/build"
+    #- "./app/dropbox"
 
 deployment:
   apps:
