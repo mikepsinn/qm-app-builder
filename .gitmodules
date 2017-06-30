@@ -1,0 +1,4 @@
+[submodule "app"]
+	path = app
+	url = https://github.com/QuantiModo/quantimodo-android-chrome-ios-web-app.git
+	branch = master
