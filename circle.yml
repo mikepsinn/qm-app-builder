@@ -20,6 +20,7 @@ dependencies:
     - git fetch --all --unshallow
     - chmod 777 -R $PWD
     - npm install -g gulp cordova@7.0.0 ionic@2.2.3 bower
+    - mkdir app/node_modules # See https://circleci.com/docs/1.0/how-cache-works/
   post:
     - tree
     - chmod -R +x ./app/scripts
@@ -31,8 +32,8 @@ dependencies:
     - echo "This line is to prevent automatic dependency installation."
 
   cache_directories:
-    - /home/ubuntu/nvm/versions/node/<version>/bin
-    - /home/ubuntu/nvm/versions/node/<version>/lib/node_modules
+    - /home/ubuntu/nvm/versions/node/6.10.3/bin
+    - /home/ubuntu/nvm/versions/node/6.10.3/lib/node_modules
     - app/node_modules   # Probably don't want to cache node_modules so we catch problematic dependency changes
 
 test:
