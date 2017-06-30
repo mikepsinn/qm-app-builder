@@ -22,7 +22,7 @@ dependencies:
     - chmod -R +x ./app/scripts
     - chmod +x -R ./app/hooks/*
   pre:
-    - apt-get install -y tree
+    - sudo apt-get update; sudo apt-get install tree imagemagick
     - git fetch --all --unshallow
     - chmod 777 -R $PWD
 
