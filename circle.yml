@@ -52,9 +52,10 @@ deployment:
   apps:
     branch: /apps\/.*/
     commands:
-      - cd app && gulp prepareRepositoryForAndroid --clientId ${CIRCLE_BRANCH}
-      - cd app && gulp buildAndroidApp --clientId ${CIRCLE_BRANCH}
-      - cd app && gulp buildChromeExtension --clientId ${CIRCLE_BRANCH}
+      - cd app && gulp prepareRepositoryForAndroid
+      - cd app && gulp buildAndroidApp
+      - cd app && gulp buildChromeExtension
+      - cd app && gulp verify-and-post-notify-collaborators-android
   staging:
     branch: develop
     commands:
