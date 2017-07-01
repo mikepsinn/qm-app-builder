@@ -11,14 +11,13 @@ machine:
 checkout:
   post:
     - git submodule sync --recursive
-    - git submodule update --recursive --init # use submodules
+    - git submodule update --remote --recursive  # Should get the most recent commit of the branch specified in .gitmodules
     - cp -r app/android-licenses/. $ANDROID_HOME/licenses
 
 # Customize dependencies
 dependencies:
   pre:
     - sudo apt-get update; sudo apt-get install tree imagemagick
-    - git fetch --all --unshallow
     - chmod 777 -R $PWD
     - npm install -g gulp cordova@7.0.0 ionic@2.2.3 bower
   post:
