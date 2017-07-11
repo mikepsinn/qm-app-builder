@@ -1,5 +1,7 @@
 # Customize the test machine
 machine:
+  ruby:
+    version: 2.4.1
   java:
     version: oraclejdk8
   environment:
@@ -27,14 +29,13 @@ dependencies:
     - cd app && ionic info
 
   override:
+    - sudo gem install fastlane
     - sudo apt-get update; sudo apt-get install tree imagemagick
     - cd app && npm install -g gulp cordova@7.0.0 ionic@2.2.3 bower
     - cd app && npm install
     - cd app && gulp prepareRepositoryForAndroidWithoutCleaning
-    - sudo gem install fastlane
 
   cache_directories:
-    - sudo gem install fastlane
     - /home/ubuntu/nvm/versions/node/6.10.3/bin
     - /home/ubuntu/nvm/versions/node/6.10.3/lib/node_modules
     - app/node_modules   # Probably don't want to cache node_modules so we catch problematic dependency changes
