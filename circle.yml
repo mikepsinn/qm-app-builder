@@ -33,6 +33,7 @@ dependencies:
     - cd app && gulp prepareRepositoryForAndroidWithoutCleaning
 
   cache_directories:
+    - sudo gem install fastlane
     - /home/ubuntu/nvm/versions/node/6.10.3/bin
     - /home/ubuntu/nvm/versions/node/6.10.3/lib/node_modules
     - app/node_modules   # Probably don't want to cache node_modules so we catch problematic dependency changes
@@ -62,6 +63,7 @@ deployment:
       - cd app && gulp buildAndroidApp
       - cd app && gulp buildChromeExtension
       - cd app && gulp verify-and-post-notify-collaborators-android
+      - cd app && gulp fastlaneSupplyBeta
   staging:
     branch: develop
     commands:
@@ -71,4 +73,4 @@ deployment:
     branch: master
     commands:
       - cd app && ./scripts/circleci_build_android_apps_and_chrome_extensions.sh
-      - cd app && gulp ionicUploadProductionForAllApps
+      #- cd app && gulp ionicUploadProductionForAllApps
