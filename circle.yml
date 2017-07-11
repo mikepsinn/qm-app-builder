@@ -30,7 +30,7 @@ dependencies:
     - cd app && ionic info
 
   override:
-    - gem install fastlane
+    - gem install fastlane # Don't use sudo or it uses old ruby version
     - sudo apt-get update; sudo apt-get install tree imagemagick
     - cd app && npm install -g gulp cordova@7.0.0 ionic@2.2.3 bower
     - cd app && npm install
