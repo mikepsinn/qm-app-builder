@@ -34,7 +34,8 @@ dependencies:
     - sudo apt-get update; sudo apt-get install tree imagemagick
     - cd app && npm install -g gulp cordova@7.0.0 ionic@2.2.3 bower
     - cd app && npm install
-    - cd app && gulp prepareRepositoryForAndroidWithoutCleaning
+    #- cd app && gulp prepareRepositoryForAndroidWithoutCleaning
+    - cd app && gulp prepareRepositoryForAndroid
 
   cache_directories:
     - /home/ubuntu/nvm/versions/node/6.10.3/bin
