@@ -1,7 +1,7 @@
 # Customize the test machine
 machine:
-  node:
-    version: 6.10.3
+  ruby:
+    version: 2.4.1
   java:
     version: oraclejdk8
   environment:
@@ -12,28 +12,40 @@ checkout:
   post:
     - git submodule sync --recursive
     - git submodule update --remote --recursive  # Should get the most recent commit of the branch specified in .gitmodules
+    - chmod -R +x ./app/scripts
+    - chmod +x -R ./app/hooks/*
     - cp -r app/android-licenses/. $ANDROID_HOME/licenses
+    - chmod 777 -R $PWD
 
 # Customize dependencies
 dependencies:
   pre:
-    - sudo apt-get update; sudo apt-get install tree imagemagick
-    - chmod 777 -R $PWD
-    - npm install -g gulp cordova@7.0.0 ionic@2.2.3 bower
+    - ruby -v
+    - mkdir node_modules || true # must exist prior to override to cache
+    - mkdir platforms || true # must exist prior to override to cache
+    - mkdir plugins || true # must exist prior to override to cache
+    - mkdir www/lib || true # must exist prior to override to cache
+
   post:
-    #- tree
-    - chmod -R +x ./app/scripts
-    - chmod +x -R ./app/hooks/*
-    - cd app && npm install
     - cd app && ionic info
 
   override:
-    - echo "This line is to prevent automatic dependency installation."
+    - gem install fastlane # Don't use sudo or it uses old ruby version
+    - sudo apt-get update; sudo apt-get install tree imagemagick
+    - cd app && npm install -g gulp cordova@7.0.0 ionic@2.2.3 bower
+    - cd app && npm install
+    #- cd app && gulp prepareRepositoryForAndroidWithoutCleaning
+    - cd app && gulp prepareRepositoryForAndroid
 
   cache_directories:
     - /home/ubuntu/nvm/versions/node/6.10.3/bin
     - /home/ubuntu/nvm/versions/node/6.10.3/lib/node_modules
     - app/node_modules   # Probably don't want to cache node_modules so we catch problematic dependency changes
+    - app/platforms
+    - app/plugins
+    - app/www/lib
+    - /opt/circleci/nodejs/v4.2.6/bin
+    - /opt/circleci/nodejs/v4.2.6/lib/node_modules
 
 test:
   override:
@@ -45,17 +57,17 @@ general:
       - gh-pages # list of branches to ignore
       - /release\/.*/ # or ignore regexes
   artifacts:
-    - "./app/build"
+    #- "./app/build"
     #- "./app/dropbox"
 
 deployment:
   apps:
     branch: /apps\/.*/
     commands:
-      - cd app && gulp prepareRepositoryForAndroid
       - cd app && gulp buildAndroidApp
       - cd app && gulp buildChromeExtension
       - cd app && gulp verify-and-post-notify-collaborators-android
+      - cd app && gulp fastlaneSupplyBeta
   staging:
     branch: develop
     commands:
@@ -65,4 +77,4 @@ deployment:
     branch: master
     commands:
       - cd app && ./scripts/circleci_build_android_apps_and_chrome_extensions.sh
-      - cd app && gulp ionicUploadProductionForAllApps
+      #- cd app && gulp ionicUploadProductionForAllApps
