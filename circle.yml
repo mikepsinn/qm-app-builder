@@ -67,7 +67,6 @@ deployment:
       - cd app && gulp buildAndroidApp
       - cd app && gulp buildChromeExtension
       - cd app && gulp verify-and-post-notify-collaborators-android
-      - cd app && gulp fastlaneSupplyBeta
   staging:
     branch: develop
     commands:
