@@ -64,10 +64,9 @@ deployment:
   apps:
     branch: /apps\/.*/
     commands:
+      - cd app && gulp buildChromeExtension # Do this first so non-Android apps will be built
       - cd app && gulp buildAndroidApp
-      - cd app && gulp buildChromeExtension
       - cd app && gulp verify-and-post-notify-collaborators-android
-      - cd app && gulp fastlaneSupplyBeta
   staging:
     branch: develop
     commands:
