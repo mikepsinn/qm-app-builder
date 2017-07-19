@@ -21,10 +21,10 @@ checkout:
 dependencies:
   pre:
     - ruby -v
-    - mkdir node_modules || true # must exist prior to override to cache
-    - mkdir platforms || true # must exist prior to override to cache
-    - mkdir plugins || true # must exist prior to override to cache
-    - mkdir www/lib || true # must exist prior to override to cache
+    - mkdir app/node_modules || true # must exist prior to override to cache
+    - mkdir app/platforms || true # must exist prior to override to cache
+    - mkdir app/plugins || true # must exist prior to override to cache
+    - mkdir app/src/lib || true # must exist prior to override to cache
 
   post:
     - cd app && ionic info
@@ -43,7 +43,7 @@ dependencies:
     - app/node_modules   # Probably don't want to cache node_modules so we catch problematic dependency changes
     - app/platforms
     - app/plugins
-    - app/www/lib
+    - app/src/lib
     - /opt/circleci/nodejs/v4.2.6/bin
     - /opt/circleci/nodejs/v4.2.6/lib/node_modules
 
