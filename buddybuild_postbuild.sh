@@ -1,2 +1,2 @@
 #!/bin/bash
-source app/buddybuild_postbuild.sh
+cd app && source buddybuild_postbuild.sh
