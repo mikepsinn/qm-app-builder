@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-source app/buddybuild_prebuild.sh
+cd app && source buddybuild_prebuild.sh
