@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-source app/buddybuild_midcordova.sh
+cd app && source buddybuild_midcordova.sh
