@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-cd app && source buddybuild_prebuild.sh
+echo "cd ${BUDDYBUILD_WORKSPACE}/app && source buddybuild_prebuild.sh"
+cd ${BUDDYBUILD_WORKSPACE}/app && source buddybuild_prebuild.sh
