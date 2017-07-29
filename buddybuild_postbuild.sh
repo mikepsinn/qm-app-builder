@@ -1,2 +1,2 @@
 #!/bin/bash
-cd app && source buddybuild_postbuild.sh
+cd ${BUDDYBUILD_WORKSPACE}/app && source buddybuild_postbuild.sh
