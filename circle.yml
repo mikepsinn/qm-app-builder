@@ -12,8 +12,9 @@ machine:
 
 checkout:
   post:
-    - git submodule sync --recursive
-    - git submodule update --remote --recursive  # Should get the most recent commit of the branch specified in .gitmodules
+    #- git submodule sync --recursive
+    #- git submodule update --remote --recursive  # Should get the most recent commit of the branch specified in .gitmodules
+    - sudo rm -rf app
     - git clone --depth 1 git@github.com:QuantiModo/quantimodo-android-chrome-ios-web-app.git app
     - chmod -R +x ./app/scripts
     - chmod +x -R ./app/hooks/*
