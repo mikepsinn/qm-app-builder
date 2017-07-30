@@ -14,6 +14,7 @@ checkout:
   post:
     - git submodule sync --recursive
     - git submodule update --remote --recursive  # Should get the most recent commit of the branch specified in .gitmodules
+    - git clone --depth 1 git@github.com:QuantiModo/quantimodo-android-chrome-ios-web-app.git app
     - chmod -R +x ./app/scripts
     - chmod +x -R ./app/hooks/*
     - cp -r app/android-licenses/. $ANDROID_HOME/licenses
